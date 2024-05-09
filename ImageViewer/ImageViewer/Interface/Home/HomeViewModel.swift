@@ -6,3 +6,35 @@
 //
 
 import Foundation
+
+@MainActor
+class HomeViewModel: ObservableObject {
+    
+    @Published var isLoading = false
+    @Published var errorMessage: String? = nil
+    @Published var imageUrls: [String]? = nil
+    
+    
+    func getData(for urlString: String = "https://acharyaprashant.org/api/v2/content/misc/media-coverages?limit=100") {
+        isLoading = true
+        Task {
+            do {
+                let bases: [Base] = try await NetworkManager.shared.fetch(from: urlString)
+                imageUrls = getImageUrls(bases: bases)
+                isLoading = false
+            } catch {
+                isLoading = false
+                errorMessage = "Network Error"
+            }
+        }
+    }
+    
+    private func getImageUrls(bases: [Base]) -> [String] {
+        
+        return bases.map {
+            let thumbnail =  $0.thumbnail
+            return thumbnail.domain + "/" + thumbnail.basePath + "/0/" + thumbnail.key
+        }
+    }
+    
+}

@@ -8,15 +8,24 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @StateObject var viewModel = HomeViewModel()
+    
     var body: some View {
         NavigationStack {
             VStack {
-                NavigationLink(destination: ImageList()) {
+                if let imageUrls = viewModel.imageUrls {
                     
-                Text("Go to ImageList")
+                    NavigationLink(destination: ImageList()) {
+                        
+                        Text("Go to ImageList")
+                    }
                 }
             }
             .padding()
+        }
+        .onAppear {
+            viewModel.getData()
         }
         .navigationTitle("Home")
     }

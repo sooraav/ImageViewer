@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ImageList: View {
     
+    @StateObject var viewModel: ImageListViewModel
+    
     let columns = [
             GridItem(.flexible()),
             GridItem(.flexible()),
