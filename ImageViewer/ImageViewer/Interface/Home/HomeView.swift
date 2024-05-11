@@ -16,7 +16,7 @@ struct HomeView: View {
             VStack {
                 if let imageUrls = viewModel.imageUrls {
                     
-                    NavigationLink(destination: ImageList()) {
+                    NavigationLink(destination: ImageList(viewModel: ImageListViewModel(imageUrls: imageUrls))) {
                         
                         Text("Go to ImageList")
                     }

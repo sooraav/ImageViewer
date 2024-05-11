@@ -19,11 +19,9 @@ struct ImageList: View {
     var body: some View {
         ScrollView {
                     LazyVGrid(columns: columns, spacing: 10) {
-                        ForEach(0..<100) { index in
+                        ForEach(viewModel.imageUrls, id: \.self) { url in
                             GeometryReader { geometry in
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
+                                AsyncLoadImageView(viewModel: AsyncLoadImageViewModel(url: url))
                                     .frame(width: geometry.size.width, height: geometry.size.height)
                                     .clipped()
                             }
@@ -39,5 +37,5 @@ struct ImageList: View {
     }
 
 #Preview {
-    ImageList()
+    ImageList(viewModel: ImageListViewModel(imageUrls: []))
 }

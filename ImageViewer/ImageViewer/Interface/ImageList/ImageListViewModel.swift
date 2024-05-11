@@ -9,5 +9,10 @@ import Foundation
 
 class ImageListViewModel: ObservableObject {
     
+    let imageUrls: [String]
+    
+    init(imageUrls: [String]) {
+        self.imageUrls = imageUrls
+    }
     
 }
