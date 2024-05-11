@@ -20,9 +20,13 @@ struct HomeView: View {
                         
                         Text("Go to ImageList")
                     }
+                } else {
+                    ProgressView()
                 }
             }
             .padding()
+            
+            
         }
         .onAppear {
             viewModel.getData()
