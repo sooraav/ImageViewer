@@ -22,8 +22,9 @@ class ImageCache {
         
         // Check local cache (disk cache)
         if let imageURL = localURL(forKey: key),
-           let imageData = try? Data(contentsOf: imageURL),
+           let imageData = try? Data(contentsOf: imageURL.appendingPathComponent("image")),
            let image = UIImage(data: imageData) {
+            
             memoryCache.setObject(image, forKey: key as NSString)
             return image
         }
@@ -37,7 +38,15 @@ class ImageCache {
         // Save to local cache (disk cache)
         if let imageURL = localURL(forKey: key),
            let data = image.pngData() {
-            try? data.write(to: imageURL, options: [.atomic])
+            
+            do {
+                
+                try FileManager().createDirectory(at: imageURL, withIntermediateDirectories: true)
+                try data.write(to: imageURL.appendingPathComponent("image"), options: [.atomic])
+            } catch(let error) {
+                
+                print("Loading image from local failed: \(error)")
+            }
         }
     }
     
@@ -45,6 +54,10 @@ class ImageCache {
         guard let cacheDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else {
             return nil
         }
-        return cacheDirectory.appendingPathComponent(key)
+        if let encodedKey = key.addingPercentEncoding(withAllowedCharacters: .alphanumerics) {
+            
+            return cacheDirectory.appendingPathComponent(encodedKey)
+        }
+        return nil
     }
 }
