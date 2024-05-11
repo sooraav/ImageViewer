@@ -18,7 +18,9 @@
 		21A34CDB2BED2F85001E79B5 /* ImageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A34CDA2BED2F85001E79B5 /* ImageListViewModel.swift */; };
 		21A34CDD2BED304B001E79B5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A34CDC2BED304B001E79B5 /* NetworkManager.swift */; };
 		21A34CE02BED30D2001E79B5 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A34CDF2BED30D2001E79B5 /* NetworkError.swift */; };
-		21A34CE32BED4894001E79B5 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A34CE22BED4894001E79B5 /* ImageManager.swift */; };
+		21A34CE32BED4894001E79B5 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A34CE22BED4894001E79B5 /* ImageCache.swift */; };
+		21E69BAF2BEF8EA900297C45 /* AsyncLoadImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E69BAE2BEF8EA900297C45 /* AsyncLoadImageView.swift */; };
+		21E69BB22BEF8F2900297C45 /* AsyncLoadImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E69BB12BEF8F2900297C45 /* AsyncLoadImageViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +36,9 @@
 		21A34CDA2BED2F85001E79B5 /* ImageListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageListViewModel.swift; sourceTree = "<group>"; };
 		21A34CDC2BED304B001E79B5 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		21A34CDF2BED30D2001E79B5 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		21A34CE22BED4894001E79B5 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		21A34CE22BED4894001E79B5 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		21E69BAE2BEF8EA900297C45 /* AsyncLoadImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncLoadImageView.swift; sourceTree = "<group>"; };
+		21E69BB12BEF8F2900297C45 /* AsyncLoadImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncLoadImageViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +91,7 @@
 		21A34CD02BED1ACE001E79B5 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				21E69BAD2BEF8E7E00297C45 /* ReusableViews */,
 				21A34CD12BED1CA9001E79B5 /* ImageList */,
 				21A34CD22BED1EEA001E79B5 /* Home */,
 			);
@@ -134,9 +139,26 @@
 		21A34CE12BED4870001E79B5 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				21A34CE22BED4894001E79B5 /* ImageManager.swift */,
+				21A34CE22BED4894001E79B5 /* ImageCache.swift */,
 			);
 			path = Image;
+			sourceTree = "<group>";
+		};
+		21E69BAD2BEF8E7E00297C45 /* ReusableViews */ = {
+			isa = PBXGroup;
+			children = (
+				21E69BB02BEF8F0200297C45 /* AsyncLoadImage */,
+			);
+			path = ReusableViews;
+			sourceTree = "<group>";
+		};
+		21E69BB02BEF8F0200297C45 /* AsyncLoadImage */ = {
+			isa = PBXGroup;
+			children = (
+				21E69BAE2BEF8EA900297C45 /* AsyncLoadImageView.swift */,
+				21E69BB12BEF8F2900297C45 /* AsyncLoadImageViewModel.swift */,
+			);
+			path = AsyncLoadImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,12 +232,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				21A34CD52BED2F56001E79B5 /* HomeModel.swift in Sources */,
-				21A34CE32BED4894001E79B5 /* ImageManager.swift in Sources */,
+				21A34CE32BED4894001E79B5 /* ImageCache.swift in Sources */,
 				21A34CDB2BED2F85001E79B5 /* ImageListViewModel.swift in Sources */,
 				21A34CCE2BED1934001E79B5 /* ImageListView.swift in Sources */,
 				21A34CC02BED1497001E79B5 /* HomeView.swift in Sources */,
+				21E69BB22BEF8F2900297C45 /* AsyncLoadImageViewModel.swift in Sources */,
 				21A34CDD2BED304B001E79B5 /* NetworkManager.swift in Sources */,
 				21A34CD92BED2F75001E79B5 /* ImageListModel.swift in Sources */,
+				21E69BAF2BEF8EA900297C45 /* AsyncLoadImageView.swift in Sources */,
 				21A34CE02BED30D2001E79B5 /* NetworkError.swift in Sources */,
 				21A34CD72BED2F68001E79B5 /* HomeViewModel.swift in Sources */,
 				21A34CBE2BED1497001E79B5 /* ImageViewerApp.swift in Sources */,

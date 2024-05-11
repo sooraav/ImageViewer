@@ -14,15 +14,18 @@ class NetworkManager {
     
     func fetch<T: Decodable>(from urlString: String) async throws -> T {
         
-        guard let url = URL(string: urlString) else  {
-            throw NetworkError.invalidUrl
-        }
-        
-        let (data, _) = try await URLSession.shared.data(from: url)
-        
+        let data = try await request(from: urlString)
         guard let decodedResponse = try? JSONDecoder().decode(T.self, from: data) else {
             throw NetworkError.decodeFailed
         }
         return decodedResponse
+    }
+    
+    func request(from urlString:String) async throws -> Data {
+        guard let url = URL(string: urlString) else  {
+            throw NetworkError.invalidUrl
+        }
+        let (data, _) = try await URLSession.shared.data(from: url)
+        return data
     }
 }
