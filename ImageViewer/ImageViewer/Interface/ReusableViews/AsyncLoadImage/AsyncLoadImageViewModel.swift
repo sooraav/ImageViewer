@@ -35,7 +35,7 @@ class AsyncLoadImageViewModel: ObservableObject {
                 let data = try await NetworkManager.shared.request(from: url)
                 guard let uiImage = UIImage(data: data) else {
                     print("Error parsing Image")
-                    image = UIImage(named: "exclamationmark.triangle.fill")
+                    image = UIImage(systemName: "exclamationmark.triangle.fill")
                     return }
                 image = uiImage
                 ImageCache.shared.setImage(uiImage, forKey: url)
@@ -45,7 +45,7 @@ class AsyncLoadImageViewModel: ObservableObject {
                 if urlError?.code.rawValue != -999 {
                     
                     print("Error Downloading Image: \(error)")
-                    image = UIImage(named: "exclamationmark.triangle.fill")
+                    image = UIImage(systemName: "exclamationmark.triangle.fill")
                 }
             }
         }
