@@ -28,16 +28,16 @@ class AsyncLoadImageViewModel: ObservableObject {
             return
         }
         
-        task = Task {
+        task = Task.detached { [self] in
             print("Downloading from Url: \(url)")
             do {
                 
                 let data = try await NetworkManager.shared.request(from: url)
                 guard let uiImage = UIImage(data: data) else {
                     print("Error parsing Image")
-                    image = UIImage(systemName: "exclamationmark.triangle.fill")
+                    await updateImage()
                     return }
-                image = uiImage
+                await updateImage(uiImage: uiImage)
                 ImageCache.shared.setImage(uiImage, forKey: url)
             } catch (let error){
                 
@@ -45,13 +45,21 @@ class AsyncLoadImageViewModel: ObservableObject {
                 if urlError?.code.rawValue != -999 {
                     
                     print("Error Downloading Image: \(error)")
-                    image = UIImage(systemName: "exclamationmark.triangle.fill")
+                    await updateImage()
                 }
             }
         }
         
     }
     
+    
+    private func updateImage(uiImage: UIImage? = nil) {
+        if let uiImage {
+            image = uiImage
+        } else {
+            image = UIImage(systemName: "exclamationmark.triangle.fill")
+        }
+    }
     func cancelTask() {
         if task != nil {
             print("Download Cancelled")
